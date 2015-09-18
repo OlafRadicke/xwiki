@@ -30,6 +30,28 @@ In order to make `HOST_DIR_FOR_XWIKI_DATA` and `HOST_DIR_FOR_MYSQL_DATA` accessi
 
 In order to avoid writing problems do a `chown 101:103` on `HOST_DIR_FOR_XWIKI_DATA`, and `chown 102:104` on `HOST_DIR_FOR_MYSQL_DATA`.
 
+# Create images #
+
+```
+docker build -t xwiki:1 .
+docker push 10.24.1.97:5000/xwiki:1
+
+```
+# Push images in registry #
+
+```
+docker push 10.24.1.97:5000/xwiki:1
+```
+
+# Using imaage from registry #
+
+In interactive mode without persistence.
+
+```
+docker run --rm -i -t -p 8080:8080 xwiki:1
+
+```
+
 # Disclaimer
 
 I still need to find a way to shut things down gracefully, so do not use this in production :)
