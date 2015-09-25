@@ -1,12 +1,12 @@
-# Introduction
+# Introduction# 
 
 This project contains the Dockerfile for building a container running XWiki 7.0 on Tomcat with MySQL as a database.
 
-# Building
+# Building #
 
 Just run `docker build .` and you should have your image ready in your docker repository.
 
-# Running
+# Running #
 
 When running the container you must specify the following information:
 
@@ -52,7 +52,13 @@ docker run --rm -i -t -p 8080:8080 xwiki:1
 
 ```
 
-# Disclaimer
+## Logging ##
+
+* [External docu](http://platform.xwiki.org/xwiki/bin/view/AdminGuide/Logging)
+  * Log configuration:  WEB-INF/classes/logback.xml
+  * Lof file: tomcat/logs/catalina.out
+
+# Disclaimer #
 
 I still need to find a way to shut things down gracefully, so do not use this in production :)
 

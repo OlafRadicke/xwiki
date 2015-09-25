@@ -1,0 +1,40 @@
+---
+- name: install docker and pip
+  apt:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+#    - "python-docker-py"
+    - "docker.io"
+    - "python-pip"
+  when: ansible_os_family == "Debian"
+
+- name: Install package over pip
+  pip:
+    name: "docker-py"
+  when: ansible_os_family == "Debian"
+
+- name: Start docke service.
+  service:
+    name: "docker.io"
+    state: "started"
+  when: ansible_os_family == "Debian"
+
+- name: create dirs VOR ANSIBLE
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    mode: "u+rwx,g+rwx,o+x"
+    recurse: "yes"
+  with_items:
+    - "{{ xwiki_data }}"
+    - "{{ mysql_data }}"
+
+- name: Start build container
+  docker:
+    name: "pre-depoly"
+    image: "{{ dockerregistry }}/{{ containerimages }}"
+    volumes:
+      - "{{ xwiki_data }}:/var/lib/xwiki"
+      - "{{ mysql_data }}:/var/lib/mysql"
+    state: "restarted"

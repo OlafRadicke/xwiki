@@ -1,0 +1,4 @@
+containerimages: "xwiki"
+dockerregistry: "10.24.1.97:5000"
+xwiki_data: "/srv/docker/xwiki/data"
+mysql_data: "/srv/docker/mysql/data"
