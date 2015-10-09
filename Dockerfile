@@ -1,27 +1,24 @@
 FROM debian:wheezy
 
-MAINTAINER Fabio Mancinelli fabio.mancinelli@xwiki.com
+MAINTAINER Olaf Radicke o.adicke@meteocontol.de
 
 # Set the mount points
 VOLUME ["/var/lib/mysql", "/var/lib/xwiki"]
 
 # Install JDK + MySQL + Tomcat7 + XWiki
 RUN (apt-get update && \
-     apt-get install -y openjdk-7-jdk && \
-     apt-get install -y tomcat7 && \
-     echo "mysql-server mysql-server/root_password password your_password" | /usr/bin/debconf-set-selections && \
-     echo "mysql-server mysql-server/root_password_again password your_password" | /usr/bin/debconf-set-selections && \
-     apt-get install -y mysql-server && \
-     apt-get install -y wget && \
-     apt-get install -y unzip && \
-     wget -P /tmp http://download.forge.ow2.org/xwiki/xwiki-enterprise-web-7.0.war && \
-     unzip -d /var/lib/tomcat7/webapps/xwiki /tmp/xwiki-enterprise-web-7.0.war && \
-     wget -P /var/lib/tomcat7/webapps/xwiki/WEB-INF/lib http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar && \
-     mkdir -p /var/lib/xwiki && \
-     chown tomcat7:tomcat7 /var/lib/xwiki && \
-     mkdir -p /var/lib/tomcat7/bin && \
-     chown tomcat7:tomcat7 /var/lib/tomcat7/bin && \
-     apt-get clean)
+     apt-get install -y openjdk-7-jdk \
+     tomcat7 && \
+     wget && \
+     unzip)
+RUN wget -P /tmp http://download.forge.ow2.org/xwiki/xwiki-enterprise-web-7.0.war
+RUN unzip -d /var/lib/tomcat7/webapps/xwiki /tmp/xwiki-enterprise-web-7.0.war
+RUN wget -P /var/lib/tomcat7/webapps/xwiki/WEB-INF/lib http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar
+RUN mkdir -p /var/lib/xwiki
+RUN chown tomcat7:tomcat7 /var/lib/xwiki
+RUN mkdir -p /var/lib/tomcat7/bin
+RUN chown tomcat7:tomcat7 /var/lib/tomcat7/bin
+RUN apt-get clean
 
 # Inject configuration files
 ADD ["files/hibernate.cfg.xml", "files/xwiki.properties", "/var/lib/tomcat7/webapps/xwiki/WEB-INF/"]
