@@ -1,6 +1,0 @@
-
-- hosts: xwiki
-  remote_user: demo
-  sudo: yes
-  roles:
-    - start-xwiki
