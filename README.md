@@ -1,4 +1,4 @@
-# Introduction# 
+# Introduction # 
 
 This project contains the Dockerfile for building a container running XWiki 7.0 on Tomcat with PostgreSQL as backend
 (in a other container).
