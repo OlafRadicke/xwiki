@@ -1,0 +1,22 @@
+# docker compose example file
+
+xwiki:
+  image: "url-to-dockerhub/xwiki:7.3"
+  links:
+    - xwikipostgresql:xwikidb
+  ports:
+    - "49108:8080"
+  volumes:
+    - "dockervolumes/xwiki/var/local/xwiki:/var/local/xwiki"
+  environment:
+    http_proxy: "http://XXX.XXX.XXX.XXX:8080/"
+    https_proxy: "http://XXX.XXX.XXX.XXX:8080/"
+    no_proxy: "localhost,127.0.0.0/8,XXX.0.0.0/8"
+    JAVA_OPTS: "-Djava.awt.headless=true -Dhttp.proxyHost=XXX.XXX.XXX.XXX -Dhttp.proxyPort=8080 -Dhttps.proxyHost=XXX.XXX.XXX.XXX -Dhttps.proxyPort=8080"
+xwikipostgresql:
+  image: "postgres"
+  volumes:
+    - "dockervolumes/xwikipostgresql/var/lib/postgresql/data:/var/lib/postgresql/data"
+  environment:
+    POSTGRES_USER: "xwiki"
+    POSTGRES_PASSWORD: "xwiki"
