@@ -22,8 +22,8 @@ RUN wget http://jdbc.postgresql.org/download/postgresql-9.3-1102.jdbc4.jar -P /v
 
 #Download WAR from xwiki
 RUN apt-get -y --force-yes install curl
-RUN wget -P /tmp http://download.forge.ow2.org/xwiki/xwiki-enterprise-web-7.0.war
-RUN unzip -d /var/lib/tomcat7/webapps/xwiki /tmp/xwiki-enterprise-web-7.0.war
+RUN wget -P /tmp http://download.forge.ow2.org/xwiki/xwiki-enterprise-web-7.4-milestone-2.war
+RUN unzip -d /var/lib/tomcat7/webapps/xwiki /tmp/xwiki-enterprise-web-7.4-milestone-2.war
 
 #Install LibreOffice
 RUN apt-get -y --force-yes install libreoffice
