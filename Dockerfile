@@ -1,4 +1,5 @@
-FROM ubuntu:14.04
+#FROM ubuntu:14.04
+FROM debian:testing
 
 MAINTAINER Olaf Radicke o.adicke@meteocontol.de
 # Dockerfile is based on https://github.com/lavadiablo/docker-xwiki
