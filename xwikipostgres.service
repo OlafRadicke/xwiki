@@ -1,0 +1,18 @@
+# /etc/systemd/system/xwiki.service
+# Doku: http://0pointer.de/public/systemd-man/systemd.service.html
+# Don't forget "systemctl daemon-reload" after changes
+
+[Unit]
+Description=A docker container with posthgrsql for xwiki
+Requires=docker.service
+
+[Service]
+Restart=always
+PIDFile=/var/run/xwikipostgres.pid
+ExecStart=/usr/bin/docker run --name=xwikipostgres -d -v dockervolumes/xwikipostgresql/var/lib/postgresql/data:/var/lib/postgresql/data --env POSTGRES_USER=xwiki --env POSTGRES_PASSWORD=xwiki postgres
+ExecReload=/usr/bin/docker stop xwikipostres && /usr/bin/docker run --name=xwikipostgres -d -v dockervolumes/xwikipostgresql/var/lib/postgresql/data:/var/lib/postgresql/data --env POSTGRES_USER=xwiki --env POSTGRES_PASSWORD=xwiki postgres
+ExecStop=/usr/bin/docker stop -t 15 xwikipostgres ; /usr/bin/docker rm -f xwikipostgres
+
+
+[Install]
+WantedBy=multi-user.target

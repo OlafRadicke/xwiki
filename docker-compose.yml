@@ -1,7 +1,8 @@
 # docker compose example file
 
 xwiki:
-  image: "url-to-dockerhub/xwiki:7.3"
+#  image: "url-to-dockerhub/xwiki:7.1.4"
+  image: "xwiki:7.1.4"
   links:
     - xwikipostgresql:xwikidb
   ports:

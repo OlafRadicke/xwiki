@@ -33,7 +33,7 @@ RUN apt-get -y --force-yes install libreoffice
 
 RUN perl -i -p0e "s/# environment.permanentDirectory/  environment.permanentDirectory=\/var\/lib\/xwiki/smg" /var/lib/tomcat7/webapps/xwiki/WEB-INF/xwiki.properties
 RUN perl -i -p0e "s/# xwiki.authentication.ldap=1/  xwiki.authentication.ldap=1/smg" /var/lib/tomcat7/webapps/xwiki/WEB-INF/xwiki.cfg
-RUN perl -i -p0e "s/# xwiki.webapppath=/  xwiki.webapppath=xwiki/smg" /var/lib/tomcat7/webapps/xwiki/WEB-INF/xwiki.cfg
+#RUN perl -i -p0e "s/# xwiki.webapppath=/  xwiki.webapppath=xwiki/smg" /var/lib/tomcat7/webapps/xwiki/WEB-INF/xwiki.cfg
 COPY ./conf/hibernate.cfg.xml /var/lib/tomcat7/webapps/xwiki/WEB-INF/hibernate.cfg.xml
 ENV JAVA_OPTS  -Djava.awt.headless=true
 
