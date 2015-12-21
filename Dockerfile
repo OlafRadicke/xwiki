@@ -27,7 +27,7 @@ RUN wget -P /tmp http://download.forge.ow2.org/xwiki/xwiki-enterprise-web-7.1.4.
 RUN unzip -d /var/lib/tomcat7/webapps/xwiki /tmp/xwiki-enterprise-web-7.1.4.war
 
 #Install LibreOffice
-RUN apt-get -y --force-yes install libreoffice
+#RUN apt-get -y --force-yes install libreoffice
 
 #Config
 
